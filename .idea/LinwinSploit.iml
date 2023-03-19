@@ -7,8 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/resource" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/jre" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (LinwinSploit)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
