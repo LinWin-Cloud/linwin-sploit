@@ -3,7 +3,7 @@
 # https://gitee.com/LinWin-Cloud/linwin-sploit/
 
 import os
-import sys
+import WebControl as webControl
 
 
 def get_file_content(path: str, exception: bool) -> str:
@@ -40,15 +40,25 @@ def run_command(command: str) -> bool:
             print(get_file_content(runPath + "/../resource/Payload.txt", True))
             return True
 
-        if command.startswith("use"):
-
-
+        if command.startswith("use "):
+            use_payload = command[5:len(command)]
+            webControl.web_control_console(use_payload)
+            return True
+        if command == 'exit':
+            exit()
         else:
             os.system(command)
             return True
     except:
         print("INPUT COMMAND ERROR!")
         return False
+
+
+def main():
+    while True:
+        command = input(commandLine)
+        run_command(command)
+
 
 if __name__ == '__main__':
     # 启动Logo画面
@@ -58,7 +68,4 @@ if __name__ == '__main__':
     print("  [ CopyRight By LinwinSoft ]")
     print("  [ Version : " + version + " ]")
     print()
-
-    while True:
-        command = input(commandLine)
-        run_command(command)
+    main()
