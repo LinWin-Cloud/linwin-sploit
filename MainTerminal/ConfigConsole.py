@@ -1,4 +1,5 @@
 import main as main
+import os
 
 
 def configConsole():
@@ -13,11 +14,28 @@ def configConsole():
         options = options.strip()
 
         if options == '1':
-            
+            print("For Example: "+main.software+"/jre/bin/java")
+            path = input("Enter Java Application: ")
+            path = path.strip()
+
+            if path == '':
+                continue
+            else:
+                if os.path.exists(path.replace("{Software}",main.software)) and os.path.isfile(path.replace("{Software}",main.software)):
+                    with open(main.software+"/resource/Jre.txt","w") as f:
+                        f.write(path)
+                    f.close()
+                    print("OK")
+                    continue
+                else:
+                    print("Target Path Error: "+path)
+                continue
         if options == '2':
-            pass
+            print("\n [ Version ] "+main.version+"\n")
+            continue
         if options == '3':
-            pass
+            print(main.get_file_content(main.runPath+"/../resource/About.md",False))
+            continue
         if options == '4':
             break
     
