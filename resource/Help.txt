@@ -2,10 +2,11 @@
  |-LinwinSploit Help-|
 
  Command Line:
- 1. help                         Get something help
- 2. use [Payload Name]           Use payload in the software to attack
-    For example: use linux/amd64/trojan_virus
- 3. search [Payload Name]        Search payload in the software
+ 1. help                                        Get something help.
+ 2. use [Payload Name]                          Use payload in the software to attack.
+    For example: use web/attack/trojan_virus
+ 3. search [Payload Name]                       Search payload in the software.
     For example: search linux
- 4. show payload                 Show all the payload in the software
- 5. exit                         Exit
+ 4. show payload                                Show all the payload in the software.
+ 5. exit                                        Exit.
+ 6. config                                      Enter into the config console.
