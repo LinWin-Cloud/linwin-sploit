@@ -1,1 +1,1 @@
-{Software}/jre/
+{Software}/jre/bin/java
