@@ -13,7 +13,7 @@ def configConsole():
         options = options.strip()
 
         if options == '1':
-            pass
+            
         if options == '2':
             pass
         if options == '3':

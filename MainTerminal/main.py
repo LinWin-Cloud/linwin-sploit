@@ -28,6 +28,8 @@ def get_file_content(path: str, exception: bool) -> str:
 runPath = os.path.abspath(os.path.dirname(__file__))
 version = get_file_content(runPath + "/../resource/version.txt", True).replace("\n", "")
 commandLine = "LinwinSploit-" + version + " $ "
+software = os.path.abspath(os.path.join(runPath,".."))
+jre: str
 
 
 def run_command(command: str) -> bool:
@@ -65,6 +67,12 @@ def main():
 
 
 if __name__ == '__main__':
+    # 获取配置的jre路径
+    jre = get_file_content(runPath+"/../resource/Jre.txt",True)
+    jre = jre.replace("\n","")
+    jre = jre.strip()
+    jre = jre.replace("{Software}",software)
+    
     # 启动Logo画面
     print(get_file_content(runPath + "/../resource/Logo.txt", True))
     print("  [ Enter 'help' to get help ]")
