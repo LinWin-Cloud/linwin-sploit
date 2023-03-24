@@ -4,6 +4,7 @@
 
 import os
 import WebControl as webControl
+import ConfigConsole as ConfigConsole
 
 
 def get_file_content(path: str, exception: bool) -> str:
@@ -46,6 +47,9 @@ def run_command(command: str) -> bool:
             return True
         if command == 'exit':
             exit()
+        if command == 'config':
+            ConfigConsole.configConsole()
+            return True
         else:
             os.system(command)
             return True

