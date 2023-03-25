@@ -8,5 +8,6 @@
     5. program/python/backdoor          make a .py file amd run with python runtime
     6. program/java/trojan_virus        make a jar file and run with java runtime
     7. web/attack/trojan_virus          use web page or javascript control Browser
-    8. web/attack/crash_virus           crash virus in web
+    8. web/attack/crash_virus           crash virus in web.
+    9. post/proxy/server                Hide attacks through proxy servers.
 
