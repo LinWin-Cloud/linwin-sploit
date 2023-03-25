@@ -8,9 +8,9 @@ import ConfigConsole as ConfigConsole
 
 
 def get_file_content(path: str, exception: bool) -> str:
-    # get_file_content() 方法: 获取文件的内容
-    # path: 要获取的文件路径
-    # exception: 出现意外是否退出程序, True为退出
+    # get_file_content() Function: get file content.
+    # path: this value in to get the file path
+    # exception: if can not find target file then exit.
     try:
         openfile = open(path)
         return openfile.read()
