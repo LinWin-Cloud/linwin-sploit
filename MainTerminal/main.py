@@ -55,13 +55,15 @@ def run_command(command: str) -> bool:
             return True
 
         if command.startswith("use "):
-            use_payload = command[5:len(command)]
+            use_payload = command[4:len(command)]
             if use_payload == 'web/attack/trojan_virus':
                 webControl.web_control_console(use_payload,jre,runPath)
             
             if use_payload == 'web/attack/crash_virus':
-                
-
+                print("Start Http Port on 8989: http://localhost:8989/")
+                os.system("cd "+runPath+"/../Module/web/attack/crash_virus/ && python3 -m http.server 8989")
+            else:
+                print("CAN NOT FIND TARGET MODULE: "+use_payload)
             return True
         if command == 'exit':
             exit()
