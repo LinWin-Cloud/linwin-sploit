@@ -10,4 +10,3 @@
     7. web/attack/trojan_virus          use web page or javascript control Browser
     8. web/attack/crash_virus           crash virus in web.
     9. post/proxy/server                Hide attacks through proxy servers.
-
