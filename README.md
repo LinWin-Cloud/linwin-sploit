@@ -47,3 +47,6 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
 
     调用这些模块可以快速实现渗透
 ```
+
+## 快速学习
+文档链接: https://gitee.com/LinwinSoft/linwin-sploit/wiki/home
