@@ -30,6 +30,17 @@ version = get_file_content(runPath + "/../resource/version.txt", True).replace("
 commandLine = "LinwinSploit-" + version + " $ "
 software = os.path.abspath(os.path.join(runPath,".."))
 jre: str
+payload: list[str] = [
+    'linux/amd64/trojan_virus',
+    'linux/amd64/crash_virus',
+    'linux/platform/backdoor',
+    'android/arch64/trojan_virus',
+    'program/python/backdoor',
+    'program/java/trojan_virus',
+    'web/attack/trojan_virus ',
+    'web/attack/crash_virus',
+    'post/proxy/server ',
+]
 
 
 def run_command(command: str) -> bool:
@@ -51,6 +62,13 @@ def run_command(command: str) -> bool:
             exit()
         if command == 'config':
             ConfigConsole.configConsole()
+            return True
+        if command.startswith("search "):
+            print("\n|-Search Payload-|")
+            searchPayload = command[len("search "):len(command)]
+            for i in payload:
+                if 
+            
             return True
         else:
             os.system(command)
