@@ -64,11 +64,14 @@ def run_command(command: str) -> bool:
             ConfigConsole.configConsole()
             return True
         if command.startswith("search "):
-            print("\n|-Search Payload-|")
+            print("\n |-Search Payload-|")
             searchPayload = command[len("search "):len(command)]
             for i in payload:
-                if 
-            
+                if i.find(searchPayload) != -1:
+                    print(" [FIND] "+i)
+                    continue
+
+            print()
             return True
         else:
             os.system(command)
