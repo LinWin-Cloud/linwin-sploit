@@ -24,10 +24,18 @@ def get_file_content(path: str, exception: bool) -> str:
     finally:
         pass
 
+def copy_file(source: str,target: str):
+    o = open(source)
+    r = o.read()
+
+    with open(target,"w") as f:
+        f.write(r)
+    f.close()
+
 
 runPath = os.path.abspath(os.path.dirname(__file__))
 version = get_file_content(runPath + "/../resource/version.txt", True).replace("\n", "")
-commandLine = "LinwinSploit-" + version + " $ "
+commandLine = "LinwinSploit-" + version + " [ "+os.getcwd()+" ] $ "
 software = os.path.abspath(os.path.join(runPath,".."))
 jre: str
 payload: list[str] = [
@@ -62,6 +70,11 @@ def run_command(command: str) -> bool:
             if use_payload == 'web/attack/crash_virus':
                 print("Start Http Port on 8989: http://localhost:8989/")
                 os.system("cd "+runPath+"/../Module/web/attack/crash_virus/ && python3 -m http.server 8989")
+            
+            if use_payload == 'linux/amd64/crash_virus':
+                print("The file has been generated in "+os.environ['HOME']+"/LinuxCrashVirus.sh")
+                copy_file(runPath+"/../Module/linux/amd64/crash_virus/LinuxCrashVirus.sh",os.environ['HOME']+"/LinuxCrashVirus.sh")
+
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
             return True
