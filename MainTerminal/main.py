@@ -56,7 +56,12 @@ def run_command(command: str) -> bool:
 
         if command.startswith("use "):
             use_payload = command[5:len(command)]
-            webControl.web_control_console(use_payload)
+            if use_payload == 'web/attack/trojan_virus':
+                webControl.web_control_console(use_payload,jre,runPath)
+            
+            if use_payload == 'web/attack/crash_virus':
+                
+
             return True
         if command == 'exit':
             exit()
