@@ -1,3 +1,3 @@
-Main-Class: SocketServer
+Main-Class: Main
 Manifest-Version: 1.0
 
