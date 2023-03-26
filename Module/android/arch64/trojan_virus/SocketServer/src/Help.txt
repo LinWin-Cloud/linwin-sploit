@@ -1,0 +1,11 @@
+|-LinwinSPloit-Android Trojan Virus-|
+
+1. getinfo		                       Get this android phone information.
+2. shell				       Run the command on android.
+3. start [app name]			       Start a app.
+4. applist		         	       Get all the app in this android phone.
+5. remote_file_control		               Upload,download,write,delete,revise files.
+6. exit					       Exit from this android phone.
+7. sms [phone number] [Messgae]	    	       Send sms to target phone.
+8. getlocation				       Get the Location.
+9. webcam_list				       Get All the webcam in this android phone.
