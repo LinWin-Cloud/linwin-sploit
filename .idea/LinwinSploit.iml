@@ -6,9 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/Module" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/resource" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/Module/web/attack/trojan_virus/SocketServer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Module/android/arch64/trojan_virus/SocketServer/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/jre" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/Module/android/arch64/trojan_virus/SocketServer/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/Module/android/arch64/trojan_virus/SocketServer/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
