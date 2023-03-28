@@ -38,7 +38,7 @@ runPath = os.path.abspath(os.path.dirname(__file__))
 version = get_file_content(runPath + "/../resource/version.txt", True).replace("\n", "")
 commandLine = "LinwinSploit-" + version + " [ "+os.getcwd()+" ] $ "
 software = os.path.abspath(os.path.join(runPath,".."))
-jre: str
+jre: str = ""
 payload: list[str] = [
     'linux/amd64/trojan_virus',
     'linux/amd64/crash_virus',
@@ -55,6 +55,7 @@ payload: list[str] = [
 def run_command(command: str) -> bool:
     command = command.strip()
     try:
+        #def a():
         if command == 'help':
             print(get_file_content(runPath + "/../resource/Help.txt", True))
             return True
@@ -77,7 +78,7 @@ def run_command(command: str) -> bool:
 
             if use_payload == 'post/proxy/server':
                 print(" [INFO] Proxy Server Module.")
-                ProxyService.mainUI()
+                ProxyService.mainUI(jre , runPath)
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
