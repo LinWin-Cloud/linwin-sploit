@@ -5,6 +5,7 @@
 import os
 import WebControl as webControl
 import ConfigConsole as ConfigConsole
+import ProxyService as ProxyService
 
 
 def get_file_content(path: str, exception: bool) -> str:
@@ -53,7 +54,6 @@ payload: list[str] = [
 
 def run_command(command: str) -> bool:
     command = command.strip()
-
     try:
         if command == 'help':
             print(get_file_content(runPath + "/../resource/Help.txt", True))
@@ -77,7 +77,7 @@ def run_command(command: str) -> bool:
 
             if use_payload == 'post/proxy/server':
                 print(" [INFO] Proxy Server Module.")
-                
+                ProxyService.mainUI()
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
