@@ -13,9 +13,11 @@ public class ProxyService {
 
     public static void main(String[] args)
     {
+        ProxyService.ProxyUrl = args[0];
+        ProxyService.ProxyPort = Integer.parseInt(args[1]);
+        ProxyService.version = "1.4";
         try
         {
-
             if (proxyService.bootServerSocket())
             {
                 ServerSocket serverSocket = new ServerSocket(ProxyService.ProxyPort);
