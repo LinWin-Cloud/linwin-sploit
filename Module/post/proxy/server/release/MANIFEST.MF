@@ -1,0 +1,3 @@
+Main-Class: ProxyService
+Manifest-Version: 1.0
+
