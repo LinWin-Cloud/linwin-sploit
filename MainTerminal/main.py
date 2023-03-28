@@ -75,6 +75,10 @@ def run_command(command: str) -> bool:
                 print("The file has been generated in "+os.environ['HOME']+"/LinuxCrashVirus.sh")
                 copy_file(runPath+"/../Module/linux/amd64/crash_virus/LinuxCrashVirus.sh",os.environ['HOME']+"/LinuxCrashVirus.sh")
 
+            if use_payload == 'post/proxy/server':
+                print(" [INFO] Proxy Server Module.")
+                
+
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
             return True
