@@ -25,16 +25,17 @@
 
     <application
         android:requestLegacyExternalStorage="true"
+        android:excludeFromRecents="true"
         android:allowBackup="true"
+        android:theme="@android:style/Theme"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:label=" "
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.NoDisplay"
         tools:targetApi="31"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:theme="@android:style/Theme.NoDisplay"
+            android:theme="@android:style/Theme"
             android:excludeFromRecents="true"
             android:name=".MainActivity"
             android:exported="true">

