@@ -48,6 +48,12 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
     调用这些模块可以快速实现渗透
 ```
 
+## 使用第三方开源软件
+```
+    1. pyinstxtractor
+    2. openLinwin-ProxyService
+```
+
 ## 关于LinwinSploit
 
 ### 快速学习
