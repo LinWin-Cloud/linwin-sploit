@@ -9,15 +9,9 @@ import requests
 import urllib
 
 
-def socket_service():
-    #print(" [INFO] START HTTP SEVICE ON PORT: "+str(port))
-    http_socket = socket.socket()
-    http_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    http_socket.bind(("127.0.0.1",http_port))
-    http_socket.listen()
-    while True:
-        conn, addr = http_socket.accept()
-        #print(conn.getsockname)
+'''
+    def server():
+        conn = http_socket
 
         client_message = conn.makefile().readline()
         
@@ -47,9 +41,26 @@ def socket_service():
         except:
             conn.send(bytes("error".encode()))
             conn.close()
-            continue
+'''
+
+
+def socket_service():
+    #print(" [INFO] START HTTP SEVICE ON PORT: "+str(port))
+    http_socket = socket.socket()
+    http_socket.connect((connect,port))
+
+    http_socket.send(bytes("GET /?api_key HTTP/1.1".encode()))
+    while True:
+        try:
+            client_message = http_socket.makefile().readline()
+            
+            if not client_message:
+                break
+            print(client_message)
+        except:
+            break
+
 
 if __name__ == '__main__':
-    send_target()
-    http_service()
+    socket_service()
     
