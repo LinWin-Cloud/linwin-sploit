@@ -8,8 +8,8 @@ import requests
 import urllib
 
 def send_target():
-    requests.get(connect)
-    pass
+    server = requests.get(connect)
+
 
 def http_service():
     #print(" [INFO] START HTTP SEVICE ON PORT: "+str(port))
