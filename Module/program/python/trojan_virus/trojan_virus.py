@@ -1,5 +1,6 @@
 
-connect:str = "http://127.0.0.1:8888/?api_key"
+connect: str = "127.0.0.1"
+port: int = 8888
 http_port: int = 11451
 
 import os
@@ -7,11 +8,8 @@ import socket
 import requests
 import urllib
 
-def send_target():
-    server = requests.get(connect)
 
-
-def http_service():
+def socket_service():
     #print(" [INFO] START HTTP SEVICE ON PORT: "+str(port))
     http_socket = socket.socket()
     http_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
