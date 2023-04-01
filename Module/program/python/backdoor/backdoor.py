@@ -8,7 +8,7 @@ import requests
 import urllib
 
 def send_target():
-    #requests.get(connect)
+    requests.get(connect)
     pass
 
 def http_service():
