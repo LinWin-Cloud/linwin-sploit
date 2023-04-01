@@ -49,14 +49,15 @@ def socket_service():
     http_socket = socket.socket()
     http_socket.connect((connect,port))
 
-    http_socket.send(bytes("GET /?api_key HTTP/1.1".encode()))
+    #http_socket.send(bytes("GET /?api_key HTTP/1.1".encode()))
     while True:
         try:
             client_message = http_socket.makefile().readline()
-            
+            client_message = client_message.replace("\n","")
+
             if not client_message:
                 break
-            print(client_message)
+            if client_message
         except:
             break
 
