@@ -1,7 +1,6 @@
 
 connect: str = "127.0.0.1"
 port: int = 8888
-http_port: int = 11451
 
 import os
 import socket
@@ -42,7 +41,6 @@ def socket_service():
 
                 http_socket.send(information.encode())
                 continue
-
 
             if client_message.startswith("mkdir "):
                 create_path = client_message[6:len(client_message)]
