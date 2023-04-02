@@ -38,7 +38,7 @@ def copy_file(source: str,target: str):
 
 runPath = os.path.abspath(os.path.dirname(__file__))
 version = get_file_content(runPath + "/../resource/version.txt", True).replace("\n", "")
-commandLine = "LinwinSploit-" + version + " [ "+os.getcwd()+" ] $ "
+commandLine = "LinwinSploit-" + version + " > "
 software = os.path.abspath(os.path.join(runPath,".."))
 jre: str = ""
 payload: list[str] = [
