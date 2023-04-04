@@ -5,3 +5,7 @@ threading
 random
 sys
 wget
+pyinstaller
+os
+webbrowser
+time
