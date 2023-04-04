@@ -50,7 +50,6 @@ jre: str = ""
 payload: list[str] = [
     'linux/amd64/trojan_virus',
     'linux/amd64/crash_virus',
-    'linux/platform/backdoor',
     'android/arch64/trojan_virus',
     'program/python/trojan_virus',
     'program/java/trojan_virus',
