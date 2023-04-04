@@ -51,6 +51,7 @@ payload: list[str] = [
     'web/attack/trojan_virus ',
     'web/attack/crash_virus',
     'post/proxy/server ',
+    'web/social/web_terminal'
 ]
 
 
@@ -84,6 +85,9 @@ def run_command(command: str) -> bool:
             if use_payload == 'post/proxy/server':
                 print(" [INFO] Proxy Server Module.")
                 ProxyService.mainUI(jre , runPath)
+
+            if use_payload == 'web/social/web_terminal':
+                print("")
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
