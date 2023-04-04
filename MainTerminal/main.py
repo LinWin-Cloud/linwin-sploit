@@ -7,6 +7,9 @@ import WebControl as webControl
 import ConfigConsole as ConfigConsole
 import ProxyService as ProxyService
 import PyControlConsole as PyControlConsole
+import Linux_amd64_trojanVirus as Linux_amd64_trojanVirus
+
+import sys
 import webbrowser
 import threading
 import time
@@ -99,6 +102,9 @@ def run_command(command: str) -> bool:
                 openWeb.start()
                 os.system("cd "+runPath+"/../Module/web/social/web_terminal/ && "+jre+" -jar "+runPath+"/../HttpServer/release/"+"HttpServer.jar 11451")
 
+
+            if use_payload == 'linux/amd64/trojan_virus':
+                Linux_amd64_trojanVirus.console(runPath)
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
