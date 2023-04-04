@@ -7,6 +7,9 @@ import WebControl as webControl
 import ConfigConsole as ConfigConsole
 import ProxyService as ProxyService
 import PyControlConsole as PyControlConsole
+import webbrowser
+import threading
+import time
 
 
 def get_file_content(path: str, exception: bool) -> str:
@@ -87,7 +90,15 @@ def run_command(command: str) -> bool:
                 ProxyService.mainUI(jre , runPath)
 
             if use_payload == 'web/social/web_terminal':
-                print("")
+
+                def start_web_browser():
+                    time.sleep(0.5)
+                    webbrowser.open("http://127.0.0.1:11451/")
+
+                openWeb = threading.Thread(target=start_web_browser,name="start web browser")
+                openWeb.start()
+                os.system("cd "+runPath+"/../Module/web/social/web_terminal/ && "+jre+" -jar "+runPath+"/../HttpServer/release/"+"HttpServer.jar 11451")
+
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
