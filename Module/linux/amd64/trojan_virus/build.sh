@@ -27,3 +27,5 @@ echo 'Maintainer: LinwinSoft'>> $deb_control
 echo 'Section: utils'>> $deb_control
 
 dpkg -b ./build $package_name'.deb'
+
+mv $package_name'.deb' $make_path
