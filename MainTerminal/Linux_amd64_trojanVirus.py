@@ -19,7 +19,7 @@ def make_deb_package(runpath: str):
     f.close()
 
     os.system("cd "+runpath + "/../Module/linux/amd64/trojan_virus/ && ./build.sh "+op.package_name+" "+op.make_path+" "+str(op.port)+" "+op.host)
-
+    print("OK")
 
 def show_options():
     print()
