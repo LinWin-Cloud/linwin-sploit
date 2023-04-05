@@ -9,6 +9,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Module/android/arch64/trojan_virus/SocketServer/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module/post/proxy/server/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module/program/python/trojan_virus/control/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/control" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/trojan_virus" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/jre" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
@@ -17,6 +19,8 @@
       <excludeFolder url="file://$MODULE_DIR$/Module/post/proxy/server/release" />
       <excludeFolder url="file://$MODULE_DIR$/Module/program/python/trojan_virus/control/out" />
       <excludeFolder url="file://$MODULE_DIR$/Module/program/python/trojan_virus/control/release" />
+      <excludeFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/out" />
+      <excludeFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/release" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
