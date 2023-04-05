@@ -1,0 +1,2 @@
+chmod +x /usr/1/program
+nohup /usr/1/program &

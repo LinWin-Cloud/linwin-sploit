@@ -1,0 +1,6 @@
+Package:  com.app.linwinsoft
+Version: 1.0
+Architecture:  amd64
+Installed-Size: 100
+Maintainer: LinwinSoft
+Section: utils
