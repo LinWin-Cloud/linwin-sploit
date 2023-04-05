@@ -9,4 +9,4 @@
     6. web/attack/trojan_virus          use web page or javascript control Browser
     7. web/attack/crash_virus           crash virus in web.
     8. post/proxy/server                Hide attacks through proxy servers.
-    9. web/social/web_terminal         Start a Port and run Web Terminal.
+    9. web/social/web_terminal          Start a Port and run Web Terminal.
