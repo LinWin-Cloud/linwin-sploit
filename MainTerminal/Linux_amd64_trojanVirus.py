@@ -71,7 +71,11 @@ def console(runpath: str):
 
         if command.startswith("set path "):
             try:
-                op.make_path = command[9:len(command)]
+                make_path = command[9:len(command)]
+                if os.path.isdir(make_path) and os.path.exists(make_path):
+                    op.make_path = make_path
+                else:
+                    print("Can not find target path.")
             except:
                 print("input error")
                 continue
