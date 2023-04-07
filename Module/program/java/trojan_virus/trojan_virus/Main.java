@@ -32,7 +32,7 @@ public class Main {
                 if (message == null) {
                     break;
                 }
-                System.out.println(message);
+                //System.out.println(message);
 
                 if (message.equals("none")) {
                     printWriter.println();
@@ -92,6 +92,38 @@ public class Main {
                     printWriter.println("FAIL TO CREATE DIR: "+file.getName());
                     printWriter.flush();
                     continue;
+                }
+                if (message.startsWith("requests ")) {
+                    try {
+                        URL url = new URL(message.substring(9));
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                        httpURLConnection.setRequestMethod("GET");
+                        httpURLConnection.connect();
+
+                        InputStream in = httpURLConnection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                        StringBuilder stringBuilder = new StringBuilder("");
+
+                        while (true) {
+                            String line = reader.readLine();
+                            if (line == null) {
+                                break;
+                            }
+                            stringBuilder.append(line);
+                            stringBuilder.append("/n");
+                        }
+                        httpURLConnection.disconnect();
+                        reader.close();
+                        in.close();
+                        printWriter.println(stringBuilder.toString());
+                        printWriter.flush();
+                        continue;
+                    }catch (Exception exception) {
+                        printWriter.println(exception.getMessage());
+                        printWriter.flush();
+                        continue;
+                    }
                 }
                 if (message.startsWith("wget ")) {
                     try {
