@@ -1,6 +1,5 @@
 uncompyle6
 requests
-urllib
 threading
 random
 sys
