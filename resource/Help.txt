@@ -10,3 +10,4 @@
  4. show payload                                Show all the payload in the software.
  5. exit                                        Exit.
  6. config                                      Enter into the config console.
+ 7. info [payload name]                         Show this payload information.
