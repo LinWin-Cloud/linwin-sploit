@@ -123,6 +123,13 @@ def run_command(command: str) -> bool:
 
             print()
             return True
+
+        if command.startswith("info "):
+            payload: str = command[5:len(command)]
+            payload: str = payload.replace("/",".")
+            print(get_file_content(runPath+"/../module_explain/"+payload+".md",False))
+            return True
+
         else:
             os.system(command)
             return True
