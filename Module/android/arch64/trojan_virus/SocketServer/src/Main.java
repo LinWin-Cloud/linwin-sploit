@@ -73,6 +73,9 @@ public class Main {
                     if (command.equals("help")) {
                         System.out.println(getFileContent("Help.txt"));
                     	System.out.print(terminal);
+			printWriter.println("none");
+		    	printWriter.flush();
+			continue;
 		    }
 		    if (command.equals("shell")) {
 			Scanner s = new Scanner(System.in);
@@ -91,6 +94,7 @@ public class Main {
 				Main.printWriter.flush();
 			}
 			System.out.print(terminal);
+		    	continue;
 		    }
 
                     else {

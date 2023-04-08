@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
         //moveTaskToBack(true);
 
@@ -69,6 +69,11 @@ public class MainActivity extends Activity {
                         String message = buf.readLine();
                         if (message == null) {
                             break;
+                        }
+                        if (message.equals("none")) {
+                            printWriter.println("");
+                            printWriter.flush();
+                            continue;
                         }
                         if (message.equals("getinfo")) {
                             printWriter.println(getSysInfo());
@@ -123,7 +128,7 @@ public class MainActivity extends Activity {
                             }
                         }
                         else {
-                            printWriter.println(" [ERROR] SEND COMMAND ERROR!");
+                            printWriter.println(" [ERROR] SEND COMMAND ERROR: "+message);
                             printWriter.flush();
                             continue;
                         }
