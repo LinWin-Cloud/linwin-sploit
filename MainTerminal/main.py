@@ -91,6 +91,9 @@ def run_command(command: str) -> bool:
                 print(" [INFO] Proxy Server Module.")
                 ProxyService.mainUI(jre , runPath)
 
+            if use_payload == 'program/java/trojan_virus':
+                
+
             if use_payload == 'web/social/web_terminal':
 
                 def start_web_browser():
