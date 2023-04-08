@@ -48,12 +48,11 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
 ### LinwinSploit木马渗透平台
 ```
 	1. Web Browser	 		(浏览器)
-	2. Linux   			(64位系统)
-	3. Android 			(64位系统)
-	4. Windows 			(x64 64位系统)
+	2. Linux   			    (64位系统)
+	3. Windows 			    (x64 64位系统)
 
-	5. Jvm				Java虚拟机
-	6. Python VM			Python虚拟机
+	4. Jvm				    Java虚拟机
+	5. Python VM			Python虚拟机
 ```
 
 ## 内置模块
