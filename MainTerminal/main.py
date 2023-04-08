@@ -8,6 +8,7 @@ import ConfigConsole as ConfigConsole
 import ProxyService as ProxyService
 import PyControlConsole as PyControlConsole
 import Linux_amd64_trojanVirus as Linux_amd64_trojanVirus
+import JavaControlConsole as JavaControlConsole
 
 import sys
 import webbrowser
@@ -92,7 +93,7 @@ def run_command(command: str) -> bool:
                 ProxyService.mainUI(jre , runPath)
 
             if use_payload == 'program/java/trojan_virus':
-                
+                JavaControlConsole.console(runPath,jre)
 
             if use_payload == 'web/social/web_terminal':
 

