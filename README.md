@@ -57,16 +57,19 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
 
 ## 内置模块
 ```
+    |-LinwinSploit Attack Payload-|
+
     1. linux/amd64/trojan_virus         Linux Deb install package
     2. linux/amd64/crash_virus          Linux Shell Script
-    3. linux/platform/backdoor          Linux .deb or .run file
-    4. android/arch64/trojan_virus      android apk install package
-    5. program/python/backdoor          make a .py file amd run with python runtime
-    6. program/java/trojan_virus        make a jar file and run with java runtime
-    7. web/attack/trojan_virus          use web page or javascript control Browser
-    8. web/attack/crash_virus           crash virus in web.
-    9. post/proxy/server                Hide attacks through proxy servers.
-
+    3. windows/cmd/crash_virus      	Windows cmd crash virus.
+    4. program/python/trojan_virus      make a .py file amd run with python runtime
+    5. program/java/trojan_virus        make a jar file and run with java runtime
+    6. web/attack/trojan_virus          use web page or javascript control Browser
+    7. web/attack/crash_virus           crash virus in web.
+    8. post/proxy/server                Hide attacks through proxy servers.
+    9. web/social/web_terminal          Start a Port and run Web Terminal.
+   
+    10. post/http/server		Start a http port.
     调用这些模块可以快速实现渗透
 ```
 
