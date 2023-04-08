@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Module/program/python/trojan_virus/control/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/control" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/trojan_virus" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Module/program/java/trojan_virus/make" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/jre" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
