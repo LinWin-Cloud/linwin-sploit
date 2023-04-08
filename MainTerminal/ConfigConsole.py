@@ -20,6 +20,13 @@ def configConsole():
 
             if path == '':
                 continue
+            
+            if path == '{java}':
+                with open(main.software+"/resource/Jre.txt","w") as f:
+                    f.write("java")
+                f.close()
+                print("OK")
+                continue
             else:
                 if os.path.exists(path.replace("{Software}",main.software)) and os.path.isfile(path.replace("{Software}",main.software)):
                     with open(main.software+"/resource/Jre.txt","w") as f:
