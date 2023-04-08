@@ -89,3 +89,15 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
 2. zmh-program              (真人)
 3. ChatGPT                  (计算机)
 4. LinwinSoft团队            (群体)
+
+# 软件使用权限，部分细节内容
+## 关于传播
+1. 本软件允许经过二次开发进行开源或者销售.
+2. 如果需要二次开发或者是二次销售，那么必须注明软件原作者: LinwinSoft (https://gitee.com/LinWin-Cloud/)
+
+## 关于责任
+1. 本产品作者对于使用者的任何行为不做出任何的承诺和担责
+2. 一切自己负责
+
+## 本产品免费开源
+相信开源的力量
