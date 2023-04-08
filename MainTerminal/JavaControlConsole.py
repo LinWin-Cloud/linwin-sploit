@@ -40,7 +40,7 @@ def console(runpath: str, jre: str):
 
         if command == 'make':
             #os.system("cp "+runpath+"/../Module/program/java/trojan_virus/release/app.jar")
-            os.system(jre+" -jar "+runpath+"/../Module/program/java/trojan_virus/release/make.jar "+op.name+" "+op.connect+" "+str(op.port))
+            os.system("")
             print(" [INFO] Make Java Trojan Virus OK: "+os.environ['HOME']+"/"+op.name+".jar")
 
         if command.startswith("set port "):
