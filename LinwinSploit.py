@@ -12,7 +12,6 @@ def haveLib():
         import requests
         import random
         import threading
-        import uncompyle6
     except:
         o = open(runPath+"/py_lib.txt")
         print(o.read())
