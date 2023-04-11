@@ -25,22 +25,23 @@ LinwinSploit是一款渗透测试框架，采用Python、Java、Linux Shell、Ja
 5. 进行网络安全测试人员
 
 # 安装
+本项目中有一个重要的组件 java 需要预先安装
 ### 安装库
 
 ```
-    # 首先安装Linux软件库
-    apt install `cat ./linux_lib.txt`
+# 首先安装Linux软件库
+apt install `cat ./linux_lib.txt`
 ```
 
 ### 安装python库
 
 ```
-    pip install `cat ./py_lib.txt`
+pip install `cat ./py_lib.txt`
 ```
 
 ### 启动
 ```
-    python3 LinwinSploit.py
+python3 LinwinSploit.py
 ```
 
 # 不同平台模式
