@@ -6,7 +6,6 @@ runPath = os.path.abspath(os.path.dirname(__file__))
 def HaveLib():
     try:
         import wget
-        import urllib
         import requests
     except:
         o = open(runPath+"/py_lib.txt")
