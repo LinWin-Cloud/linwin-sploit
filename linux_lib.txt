@@ -1,3 +1,4 @@
 dpkg
 apt
 python3
+openjdk-17-jdk
