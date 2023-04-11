@@ -3,15 +3,11 @@ import os
 
 runPath = os.path.abspath(os.path.dirname(__file__))
 
-def haveLib():
+def HaveLib():
     try:
-        import sys
         import wget
-        import os
         import urllib
         import requests
-        import random
-        import threading
     except:
         o = open(runPath+"/py_lib.txt")
         print(o.read())
@@ -19,6 +15,7 @@ def haveLib():
         exit(1)
 
 if __name__ == '__main__':
-    haveLib()
+
+    HaveLib()
     os.system("cd "+runPath+"/MainTerminal/ && python3 main.py")
         
