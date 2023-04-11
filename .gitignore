@@ -1,0 +1,7 @@
+# 禁止上传所有的 .class 文件
+*.class
+
+# 禁止所有的 .pyc 文件
+*.pyc
+MainTerminal/__pycache__/*.pyc
+
