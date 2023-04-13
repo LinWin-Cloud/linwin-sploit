@@ -13,12 +13,6 @@
             "import_file": "mod_gdrive"
         },
         {
-            "name": "WhatsApp Redirect",
-            "dir_name": "whatsapp_redirect",
-            "module": true,
-            "import_file": "mod_whatsapp_redirect"
-        },
-        {
             "name": "Zoom",
             "dir_name": "zoom",
             "module": false,
